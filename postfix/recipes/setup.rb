@@ -5,7 +5,6 @@ template 'opendkim public key' do
   group 'root'
   mode 0644
   backup false
-  notifies :restart, resources(:service => 'opendkim')
 end
 template 'opendkim private key' do
   path '/etc/dkimprivate.key'
@@ -14,7 +13,6 @@ template 'opendkim private key' do
   group 'root'
   mode 0644
   backup false
-  notifies :restart, resources(:service => 'opendkim')
 end
 
 template 'opendkim known hosts' do
@@ -24,6 +22,5 @@ template 'opendkim known hosts' do
   group 'root'
   mode 0644
   backup false
-  notifies :restart, resources(:service => 'opendkim')
 end
 
