@@ -1,2 +1,3 @@
-default['postfix']['setting'] = 0
+default['postfix']['public_key'] = ''
+default['postfix']['private_key'] = ''
 
