@@ -20,26 +20,26 @@ readme_directory = no
 # TLS parameters
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_use_tls=yes
+smtpd_use_tls=no
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = postfix1.localdomain
+myhostname = <%=node[:opsworks][:instance][:hostname]%>.pizap.com
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-myorigin = /etc/mailname
+myorigin = <%=node[:opsworks][:instance][:hostname]%>.pizap.com
 mydestination = postfix1.localdomain, localhost.localdomain, , localhost
 relayhost =
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mynetworks = 127.0.0.0/8
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 # DKIM
 milter_default_action = accept
-milter_protocol = 2 #( Postfix ≥ 2.6 milter_protocol = 6, Postfix ≤ 2.5 milter_protocol = 2 )
+milter_protocol = 6
 smtpd_milters = inet:localhost:8891
 non_smtpd_milters = inet:localhost:8891
 

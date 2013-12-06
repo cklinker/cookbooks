@@ -9,7 +9,7 @@ template 'opendkim public key' do
   source 'public.key.erb'
   owner 'root'
   group 'root'
-  mode 0644
+  mode 0600
   backup false
 end
 template 'opendkim private key' do
@@ -17,7 +17,7 @@ template 'opendkim private key' do
   source 'private.key.erb'
   owner 'root'
   group 'root'
-  mode 0644
+  mode 0600
   backup false
 end
 
@@ -51,6 +51,14 @@ end
 template 'postfix master config' do
   path '/etc/postfix/master.cf'
   source 'master.cf.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  backup false
+end
+template 'mailname' do
+  path '/etc/mailname'
+  source 'mailname.erb'
   owner 'root'
   group 'root'
   mode 0644
