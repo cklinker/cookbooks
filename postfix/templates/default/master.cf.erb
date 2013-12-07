@@ -111,4 +111,4 @@ mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
 
-pizap_handler unix -    n    n    -    -    pipe flags=FR user=postfix  argv=/etc/mail_handle.php  -f  $(sender) -- $(recipient)
+pizap_handler unix -    n    n    -    -    pipe flags=FR user=ubuntu  argv=/mnt/code/production-web/batchMail/bounceReceived.php  -f  $(sender) -- $(recipient)
