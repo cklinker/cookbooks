@@ -65,7 +65,7 @@ template 'mailname' do
   backup false
 end
 template 'id_rsa' do
-  path '/home/buntu/.ssh/id_rsa'
+  path '/home/ubuntu/.ssh/id_rsa'
   source 'id_rsa.erb'
   owner 'ubuntu'
   group 'ubuntu'
