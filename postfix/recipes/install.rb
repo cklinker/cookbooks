@@ -1,5 +1,5 @@
 postfix_pkgs = value_for_platform(
-  'default' => ['postfix', 'opendkim', 'php5-cli', 'php5-common']
+  'default' => ['postfix', 'opendkim', 'php5-cli']
 )
 
 postfix_pkgs.each do |pkg|
