@@ -11,12 +11,16 @@ template 'id_rsa' do
   mode 0600
   backup false
 end
+Host github.com
+  IdentityFile ~/.ssh/id_rsa
+
 directory '/mnt/code' do
   user "ubuntu"
   group "ubuntu"
 end
-deploy "/mnt/code" do
-  repo "git@github.com:pizap/production-web.git"
+
+git "/mnt/code" do
+  repository "git@github.com:pizap/production-web.git"
   user "ubuntu"
-  git_ssh_wrapper "/home/ubuntu/.ssh/chef_ssh_deploy_wrapper.sh"
+  group "ubuntu"
 end
