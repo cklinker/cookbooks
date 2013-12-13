@@ -1,4 +1,4 @@
-template "/tmp/.ssh/chef_ssh_deploy_wrapper.sh" do
+template "/home/ubuntu/.ssh/chef_ssh_deploy_wrapper.sh" do
   source "chef_ssh_deploy_wrapper.sh.erb"
   owner 'ubuntu'
   mode 0770
@@ -17,7 +17,7 @@ directory '/mnt/code' do
 end
 git "/mnt/code" do
   repository "git@github.com:pizap/production-web.git"
-  ssh_wrapper "/tmp/.ssh/chef_ssh_deploy_wrapper.sh"
+  ssh_wrapper "/home/ubuntu/.ssh/chef_ssh_deploy_wrapper.sh"
   user "ubuntu"
   group "ubuntu"
 end
