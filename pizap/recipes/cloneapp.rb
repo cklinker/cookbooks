@@ -6,9 +6,12 @@ template 'id_rsa' do
   mode 0600
   backup false
 end
-
-git "/mnt/srv/www" do
+directory '/mnt/code' do
+  user "ubuntu"
+  group "ubuntu"
+end
+git "/mnt/code" do
   repository "git@github.com:pizap/production-web.git"
   user "ubuntu"
-  group "www-data"
+  group "ubuntu"
 end
