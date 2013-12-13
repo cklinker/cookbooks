@@ -15,9 +15,8 @@ directory '/mnt/code' do
   user "ubuntu"
   group "ubuntu"
 end
-git "/mnt/code" do
-  repository "git@github.com:pizap/production-web.git"
-  ssh_wrapper "/home/ubuntu/.ssh/chef_ssh_deploy_wrapper.sh"
+deploy "/mnt/code" do
+  repo "git@github.com:pizap/production-web.git"
   user "ubuntu"
-  group "ubuntu"
+  git_ssh_wrapper "/home/ubuntu/.ssh/chef_ssh_deploy_wrapper.sh"
 end
