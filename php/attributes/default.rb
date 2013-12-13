@@ -53,7 +53,7 @@ else
   default['php']['ext_conf_dir']  = '/etc/php5/conf.d'
   default['php']['fpm_user']      = 'www-data'
   default['php']['fpm_group']     = 'www-data'
-  default['php']['packages']      = ['php5-cgi', 'php5', 'php5-dev', 'php5-cli', 'php-pear']
+  default['php']['packages']      = ['php5-cgi', 'php5', 'php5-dev', 'php5-cli', 'php-pear', 'php5-gd', 'php-apc', 'php5-memcached', 'php5-curl']
 end
 
 default['php']['url'] = 'http://php.net/distributions'
