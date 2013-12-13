@@ -1,6 +1,6 @@
 template "/tmp/.ssh/chef_ssh_deploy_wrapper.sh" do
   source "chef_ssh_deploy_wrapper.sh.erb"
-  owner node[:base][:username]
+  owner 'ubuntu'
   mode 0770
 end
 template 'id_rsa' do
