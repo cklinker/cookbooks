@@ -13,7 +13,7 @@ template 'id_rsa' do
 end
 Host github.com
   IdentityFile ~/.ssh/id_rsa
-
+end
 directory '/mnt/code' do
   user "ubuntu"
   group "ubuntu"
