@@ -1,7 +1,12 @@
-name        "mod_php5_apache2"
-description "Installs/Configures Apache with mod_php5"
-maintainer  "AWS OpsWorks"
-license     "Apache 2.0"
-version     "1.0.0"
+name              "php55"
+maintainer        "Adar Porat"
+maintainer_email "adar.porat@gmail.com"
+license           "Apache 2.0"
+description      "Installs and php 5.5"
+version          "0.0.1"
 
-depends "apache2"
+depends "build-essential"
+depends "apt"
+depends "yum"
+
+recipe "php55", "Installs php"

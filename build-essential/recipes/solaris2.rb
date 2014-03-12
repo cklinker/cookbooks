@@ -1,8 +1,9 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Cookbook Name:: build-essential
+# Recipe:: solaris2
+#
+# Copyright 2013, Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +17,26 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
+%w{
+  autoconf
+  automake
+  bison
+  coreutils
+  flex
+  gcc4core
+  gcc4g++
+  gcc4objc
+  gcc3core
+  gcc3g++
+  ggrep
+  gmake
+  gtar
+  pkgconfig
+}.each do |pkg|
+
+  r = pkgutil_package pkg do
+    action( node['build_essential']['compiletime'] ? :nothing : :install )
+  end
+  r.run_action(:install) if node['build_essential']['compiletime']
+
 end

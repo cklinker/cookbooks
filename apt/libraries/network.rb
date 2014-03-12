@@ -1,8 +1,9 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Cookbook Name:: apt
+# library:: network
+#
+# Copyright 2013, Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +17,17 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
+module ::Apt
+  def interface_ipaddress(host, interface)
+    if interface
+      addresses = host['network']['interfaces'][interface]['addresses']
+      addresses.select do |ip, data|
+        if data['family'].eql?('inet')
+          return ip
+        end
+      end
+    else
+      return host.ipaddress
+    end
+  end
 end

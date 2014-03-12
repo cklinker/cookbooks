@@ -1,8 +1,8 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Author:: Seth Chisamore (<schisamo@opscode.com>)
+#
+# Copyright:: Copyright (c) 2011-2013 Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +16,17 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
+module Opscode
+  module Mysql
+    # Opscode Mysql Helpers
+    module Helpers
+      def debian_before_squeeze?
+        (node['platform'] == 'debian') && (node['platform_version'].to_f < 6.0)
+      end
+
+      def ubuntu_before_lucid?
+        (node['platform'] == 'ubuntu') && (node['platform_version'].to_f < 10.0)
+      end
+    end
+  end
 end

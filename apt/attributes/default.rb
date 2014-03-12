@@ -1,8 +1,9 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Cookbook Name:: apt
+# Attributes:: default
+#
+# Copyright 2009-2013, Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +17,10 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
-end
+default['apt']['cacher-client']['restrict_environment'] = false
+default['apt']['cacher_dir'] = '/var/cache/apt-cacher-ng'
+default['apt']['cacher_interface'] = nil
+default['apt']['cacher_port'] = 3142
+default['apt']['caching_server'] = false
+default['apt']['compiletime'] = false
+default['apt']['key_proxy'] = ''

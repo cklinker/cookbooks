@@ -1,8 +1,9 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Cookbook Name:: build-essential
+# Recipe:: default
+#
+# Copyright 2008-2009, Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +17,8 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
+begin
+  include_recipe "build-essential::#{node['platform_family']}"
+rescue Chef::Exceptions::RecipeNotFound
+  Chef::Log.warn "A build-essential recipe does not exist for the platform_family: #{node['platform_family']}"
 end

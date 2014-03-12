@@ -1,8 +1,10 @@
 #
-# Author:: Adar Porat(<adar.porat@gmail.com>)
-# Cookbook Name:: php55
-# Attribute:: default
-##
+# Cookbook Name:: openssl
+# Library:: secure_password
+# Author:: Joshua Timberman <joshua@opscode.com>
+#
+# Copyright 2009, Opscode, Inc.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,8 +18,20 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-  when "debian"
-    node.default['php55']['dotdeb']['uri'] = "http://packages.dotdeb.org"
-    node.default['php55']['dotdeb']['distribution'] = "wheezy"
+require 'openssl'
+
+module Opscode
+  module OpenSSL
+    module Password
+      def secure_password(length = 20)
+        pw = String.new
+
+        while pw.length < length
+          pw << ::OpenSSL::Random.random_bytes(1).gsub(/\W/, '')
+        end
+
+        pw
+      end
+    end
+  end
 end

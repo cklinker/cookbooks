@@ -22,7 +22,7 @@ default['apache']['root_group'] = 'root'
 # Where the various parts of apache are
 case node['platform']
 when 'redhat', 'centos', 'scientific', 'fedora', 'suse', 'amazon', 'oracle'
-  default['apache']['package']     = 'httpd24'
+  default['apache']['package']     = 'httpd'
   default['apache']['dir']         = '/etc/httpd'
   default['apache']['log_dir']     = '/var/log/httpd'
   default['apache']['error_log']   = 'error.log'
