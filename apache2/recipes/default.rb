@@ -23,7 +23,7 @@ end
 
 service 'apache2' do
   case node['platform_family']
-  when 'rhel', 'fedora', 'suse'
+  when 'rhel', 'fedora', 'suse', 'amazon'
     service_name 'httpd'
     # If restarted/reloaded too quickly httpd has a habit of failing.
     # This may happen with multiple recipes notifying apache to restart - like
@@ -43,7 +43,7 @@ service 'apache2' do
   action :enable
 end
 
-if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd')
+if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd', 'amazon')
   directory node['apache']['log_dir'] do
     mode '0755'
   end
@@ -143,12 +143,12 @@ template '/etc/sysconfig/httpd' do
   group    node['apache']['root_group']
   mode     '0644'
   notifies :restart, 'service[apache2]'
-  only_if  { platform_family?('rhel', 'fedora') }
+  only_if  { platform_family?('rhel', 'fedora', 'amazon') }
 end
 
 template 'apache2.conf' do
   case node['platform_family']
-  when 'rhel', 'fedora', 'arch'
+  when 'rhel', 'fedora', 'arch', 'amazon'
     path "#{node['apache']['dir']}/conf/httpd.conf"
   when 'debian'
     path "#{node['apache']['dir']}/apache2.conf"
