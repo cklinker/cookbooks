@@ -15,3 +15,4 @@
       #command "apt-get install -y php5"
       command "service apache2 restart"
       action :run
+    end
