@@ -4,9 +4,24 @@
       action :run
     end
 
+    execute "add nginx repo" do
+      command "add-apt-repository ppa:nginx/stable"
+      action :run
+    end
+
+    execute "update apt" do
+      command "sudo apt-get update"
+      action :run
+    end
+
+    execute "install nginx" do
+      command "sudo apt-get install nginx"
+      action :run
+    end
+
     execute "install repo" do
       ignore_failure true
-      command "add-apt-repository ppa:ondrej/php5"
+      command "add-apt-repository ppa:ondrej/php5-oldstable"
       action :run
     end
 
@@ -18,17 +33,27 @@
 
     execute "install php" do
       ignore_failure true
-      command "apt-get install -y php5"
+      command "apt-get install -y php5-fpm php5-cli php5-cgi"
       action :run
     end
 
-    execute "remove mod" do
+    template 'default' do
+      path '/etc/nginx/sites-available/default'
+      source 'default.conf.erb'
+      owner 'root'
+      group 'root'
+      mode 0644
+      backup false
+    end
+
+    execute "restart fpm" do
       ignore_failure true
-      command "rm -f /etc/apache2/mods-enabled/authz_default.load"
+      command "service php5-fpm restart"
       action :run
     end
 
-    execute "restart apache2" do
-      command "service apache2 restart"
+    execute "restart nginx" do
+      ignore_failure true
+      command "service nginx restart"
       action :run
     end
