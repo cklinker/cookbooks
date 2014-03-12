@@ -9,17 +9,10 @@ node[:deploy].each do |application, deploy|
   ) if deploy[:scm][:scm_type].to_s == 'git'
 
   # clone the repo
-  execute "cd /var && git clone #{deploy[:scm][:repository]} #{application}" do
+  execute "cd /mnt && git clone #{deploy[:scm][:repository]} #{application}" do
     ignore_failure true
   end
 
-  # set any php.ini settings needed
-  template "/etc/php.d/#{application}.ini" do
-    source "php.conf.erb"
-    owner "root"
-    group "root"
-    mode 0644
-  end
 
   # use opsworks ssh key management and load the key into the ec2 instance. 
   # it's helpful to have the deploy key loaded into the root user
@@ -43,25 +36,9 @@ node[:deploy].each do |application, deploy|
   execute "eval `ssh-agent -s`"
   execute "ssh-agent bash -c 'ssh-add /root/.ssh/id_deploy'"
 
-  # set apache2 hosts
-  web_app application do
-    docroot /var/#{application}
-    template "webapp.conf.erb" 
-    log_dir node['apache']['log_dir'] 
-  end
 
   # use simple git pull to deploy code changes
-  execute "cd /var/#{application} && git clean -df && git reset --hard && git pull"
-  
-  # install composer
-  script "install_composer" do
-    interpreter "bash"
-    user "#{node['phpapp']['deploy']['user']}"
-    cwd "/var/#{application}"
-    code <<-EOH
-    curl -s https://getcomposer.org/installer | php
-    php composer.phar install --prefer-source --no-interaction
-    EOH
-  end
+  execute "cd /mnt/#{application} && git clean -df && git reset --hard && git pull"
+
   
 end

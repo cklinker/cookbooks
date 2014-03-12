@@ -57,3 +57,8 @@
       command "service nginx restart"
       action :run
     end
+
+directory '/mnt/ephemeral' do
+  user "www-data"
+  group "www-data"
+end
