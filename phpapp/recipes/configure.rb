@@ -33,7 +33,7 @@
 
     execute "install php" do
       ignore_failure true
-      command "apt-get install -y php5-fpm php5-cli php5-cgi"
+      command "apt-get install -y php5-fpm php5-cli php5-cgi php5-memcached php-apc"
       action :run
     end
 
