@@ -5,6 +5,7 @@
     end
 
     execute "install php55" do
+      ignore_failure true
       command "add-apt-repository ppa:ondrej/php5 && apt-get update -y && apt-get install -y php5 php5-curl"
       action :run
     end
