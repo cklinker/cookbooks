@@ -15,7 +15,7 @@
     end
 
     execute "install nginx" do
-      command "sudo apt-get install nginx"
+      command "sudo apt-get -y install nginx"
       action :run
     end
 
