@@ -13,8 +13,8 @@ directory '/mnt/ephemeral/scripts' do
   mode "0777"
 end
 directory '/mnt/ephemeral/apns_cert' do
-  user "ubuntu"
-  group "ubuntu"
+  user "tomcat7"
+  group "tomcat7"
   mode "0777"
 end
 directory '/var/log/batchPush' do
@@ -38,8 +38,8 @@ end
 template 'apns_cert' do
   path '/mnt/ephemeral/apns_cert/aps_production_key_export.p12'
   source 'aps_production_key_export.p12.erb'
-  owner 'ubuntu'
-  group 'ubuntu'
+  owner 'tomcat7'
+  group 'tomcat7'
   mode 0600
   backup false
 end
