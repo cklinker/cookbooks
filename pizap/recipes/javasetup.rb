@@ -2,11 +2,6 @@ directory '/mnt/code' do
   user "ubuntu"
   group "ubuntu"
 end
-git "/mnt/code" do
-  repository "git@github.com:pizap/production-web.git"
-  user "ubuntu"
-  group "ubuntu"
-end
 directory '/mnt/ephemeral' do
   user "ubuntu"
   group "ubuntu"
