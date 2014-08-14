@@ -24,5 +24,6 @@ node[:deploy].each do |application, deploy|
     group 'root'
     mode 0644
     backup false
+    variables(:webapp_name => application)
   end
 end
