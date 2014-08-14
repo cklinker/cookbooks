@@ -16,4 +16,13 @@ node[:deploy].each do |application, deploy|
     deploy_data deploy
     app application
   end
+
+  template 'nginx site' do
+    path ::File.join('/etc/nginx/sites_enabled/', deploy[:environment][:dns_name])
+    source 'site.erb'
+    owner 'root'
+    group 'root'
+    mode 0644
+    backup false
+  end
 end
