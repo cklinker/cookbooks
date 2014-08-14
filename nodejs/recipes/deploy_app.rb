@@ -18,7 +18,7 @@ node[:deploy].each do |application, deploy|
   end
 
   template 'nginx site' do
-    path ::File.join('/etc/nginx/sites_enabled/', deploy[:environment][:dns_name])
+    path ::File.join('/etc/nginx/sites-enabled/', deploy[:environment][:dns_name])
     source 'site.erb'
     owner 'root'
     group 'root'
