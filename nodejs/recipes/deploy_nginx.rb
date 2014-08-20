@@ -17,9 +17,9 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
-  template 'supervisor site' do
-    path ::File.join('/etc/supervisor/conf.d/', deploy[:environment][:dns_name] + '.conf')
-    source 'supervisor.erb'
+  template 'nginx site' do
+    path ::File.join('/etc/nginx/sites-enabled/', deploy[:environment][:dns_name])
+    source 'site.erb'
     owner 'root'
     group 'root'
     mode 0644
