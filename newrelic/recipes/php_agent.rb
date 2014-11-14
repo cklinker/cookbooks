@@ -6,7 +6,7 @@
 #
 
 include_recipe 'newrelic::repository'
-inlcude_recipe 'apache2::service'
+include_recipe 'apache2::service'
 
 license = node['newrelic']['application_monitoring']['license']
 
