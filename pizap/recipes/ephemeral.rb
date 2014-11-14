@@ -5,7 +5,7 @@ directory '/mnt/ephemeral' do
 end
 
 template 'config_web' do
-  path '/etc/apache2/sites-available/deploy_to_web.conf'
+  path '/etc/apache2/sites-available/deploy_to_web.conf.d/rewrite.conf'
   source 'slim_conf.erb'
   owner 'root'
   group 'root'

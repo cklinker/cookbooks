@@ -1,43 +1,11 @@
-<VirtualHost *:80 *:8000>
-  ServerName deploy_to_web
-  DocumentRoot /srv/www/deploy_to_web/current/public/
-
   <Directory /srv/www/deploy_to_web/current/public/>
-    Options FollowSymLinks
-    AllowOverride All
-    Order allow,deny
-    Allow from all
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
   </Directory>
-
-  <Directory ~ "\.svn">
-    Order allow,deny
-    Deny from all
-  </Directory>
-
-  <Directory ~ "\.git">
-    Order allow,deny
-    Deny from all
-  </Directory>
-
-  LogLevel info
-  ErrorLog /var/log/apache2/deploy_to_web-error.log
-  CustomLog /var/log/apache2/deploy_to_web-access.log combined
-  CustomLog /var/log/apache2/deploy_to_web-ganglia.log ganglia
-
-  FileETag none
 
   RewriteEngine On
 
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET,POST,OPTION"
   Header set Access-Control-Allow-Headers "x-prototype-version,x-requested-with"
-
-  IncludeOptional /etc/apache2/sites-available/deploy_to_web.conf.d/rewrite*
-
-
-
-  IncludeOptional /etc/apache2/sites-available/deploy_to_web.conf.d/local*
-</VirtualHost>
