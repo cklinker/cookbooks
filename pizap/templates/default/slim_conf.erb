@@ -9,3 +9,9 @@
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "GET,POST,OPTION"
   Header set Access-Control-Allow-Headers "x-prototype-version,x-requested-with"
+ <IfModule mod_expires.c>
+          <FilesMatch "\.(jpe?g|png|gif|js|css)$">
+                      ExpiresActive On
+                      ExpiresDefault "access plus 1 week"
+          </FilesMatch>
+</IfModule>
